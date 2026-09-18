@@ -1,0 +1,29 @@
+name: Validate metadata stripping
+
+on:
+  push:
+    branches:
+      - feature/strip-metadata
+  pull_request:
+    branches:
+      - integration
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore application
+        shell: pwsh
+        run: msbuild Application\FileConverter\FileConverter.csproj /t:Restore /p:Configuration=Release /p:Platform=x64
+
+      - name: Build application and Explorer extension
+        shell: pwsh
+        run: msbuild Application\FileConverter\FileConverter.csproj /m /p:Configuration=Release /p:Platform=x64 /p:SolutionDir="$env:GITHUB_WORKSPACE\"
