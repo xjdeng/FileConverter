@@ -459,6 +459,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "190");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.StripMetadata, "False");
                     break;
 
                 case OutputType.Mkv:
@@ -470,6 +471,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.StripMetadata, "False");
                     break;
 
                 case OutputType.Mp4:
@@ -481,6 +483,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "128");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.StripMetadata, "False");
                     break;
 
                 case OutputType.Ogv:
@@ -491,6 +494,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.AudioBitrate, "160");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.StripMetadata, "False");
                     break;
 
                 case OutputType.Webm:
@@ -501,6 +505,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.EnableFFMPEGCustomCommand, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.FFMPEGCustomCommand, string.Empty);
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.StripMetadata, "False");
                     break;
 
                 // Images
@@ -510,12 +515,14 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.StripMetadata, "False");
                     break;
 
                 case OutputType.Gif:
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoScale, "1");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.VideoFramesPerSecond, "15");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.StripMetadata, "False");
                     break;
 
                 case OutputType.Png:
@@ -523,6 +530,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.StripMetadata, "False");
                     break;
 
                 case OutputType.Jpg:
@@ -531,6 +539,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.StripMetadata, "False");
                     break;
 
                 case OutputType.Webp:
@@ -539,6 +548,7 @@ namespace FileConverter
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageRotation, "0");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageClampSizePowerOf2, "False");
                     this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.ImageMaximumSize, "0");
+                    this.InitializeSettingsValue(ConversionPreset.ConversionSettingKeys.StripMetadata, "False");
                     break;
 
                 case OutputType.Ico:
@@ -615,6 +625,7 @@ namespace FileConverter
             public const string VideoScale = "VideoScale";
             public const string VideoRotation = "VideoRotation";
             public const string VideoFramesPerSecond = "VideoFramesPerSecond";
+            public const string StripMetadata = "StripMetadata";
             public const string FFMPEGCustomCommand = "FFMPEGCustomCommand";
 
             public const string EnableAudio = "EnableAudio";

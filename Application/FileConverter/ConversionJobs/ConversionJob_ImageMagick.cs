@@ -159,6 +159,14 @@ namespace FileConverter.ConversionJobs
         {
             image.Progress += this.Image_Progress;
 
+            bool stripMetadata = this.ConversionPreset.IsRelevantSetting(ConversionPreset.ConversionSettingKeys.StripMetadata) &&
+                                 this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.StripMetadata);
+            if (stripMetadata)
+            {
+                // Bake EXIF orientation into the pixels before metadata is removed.
+                image.AutoOrient();
+            }
+
             if (!ignoreScale && this.ConversionPreset.IsRelevantSetting(ConversionPreset.ConversionSettingKeys.ImageScale))
             {
                 float scaleFactor = this.ConversionPreset.GetSettingsValue<float>(ConversionPreset.ConversionSettingKeys.ImageScale);
@@ -242,6 +250,19 @@ namespace FileConverter.ConversionJobs
                     this.ConversionFailed(string.Format(Properties.Resources.ErrorUnsupportedOutputFormat, this.ConversionPreset.OutputType));
                     image.Progress -= this.Image_Progress;
                     return;
+            }
+
+            if (stripMetadata)
+            {
+                Debug.Log("Strip image metadata while preserving the embedded color profile.");
+
+                IColorProfile colorProfile = image.GetColorProfile();
+                image.Strip();
+
+                if (colorProfile != null)
+                {
+                    image.SetProfile(colorProfile);
+                }
             }
 
             image.Write(this.OutputFilePath);

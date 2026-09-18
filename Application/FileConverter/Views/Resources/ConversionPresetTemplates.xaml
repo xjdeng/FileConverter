@@ -43,6 +43,11 @@
         <generic:BoolToVisibility/>
     </generic:ValueConverterGroup>
 
+    <generic:ValueConverterGroup x:Key="ConversionSettingsRelevantToVisibility">
+        <valueConverters:ConversionSettingsRelevant/>
+        <generic:BoolToVisibility/>
+    </generic:ValueConverterGroup>
+
     <generic:ValueConverterGroup x:Key="ReferenceToVisibility">
         <generic:EqualsConverter/>
         <generic:BoolInverterConverter/>
@@ -690,14 +695,26 @@
                 </TextBlock>
 
             </Grid>
-            <DockPanel Visibility="{Binding Settings, Converter={StaticResource ConversionSettingsToVisibility}, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean|Visible;Collapsed}">
+            <StackPanel Visibility="{Binding Settings, Converter={StaticResource ConversionSettingsToVisibility}, ConverterParameter=EnableFFMPEGCustomCommand|System.Boolean|Visible;Collapsed}">
                 <ContentControl Content="{Binding .}" Style="{StaticResource OutputTypeSelectorStyle}"/>
-            </DockPanel>
+                <CheckBox Margin="5,8,5,2"
+                          Content="Strip metadata"
+                          ToolTip="Remove embedded metadata from converted media. Image color profiles are preserved."
+                          Visibility="{Binding Settings, Converter={StaticResource ConversionSettingsRelevantToVisibility}, ConverterParameter=StripMetadata|Collapsed;Visible}"
+                          IsChecked="{Binding Settings, ConverterParameter=StripMetadata|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" />
+            </StackPanel>
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="EmptyCustomSettingsDataTemplate" DataType="{x:Type fileConverter:ConversionPreset}">
-        <ContentControl Content="{Binding .}" Style="{StaticResource OutputTypeSelectorStyle}"/>
+        <StackPanel>
+            <ContentControl Content="{Binding .}" Style="{StaticResource OutputTypeSelectorStyle}"/>
+            <CheckBox Margin="5,8,5,2"
+                      Content="Strip metadata"
+                      ToolTip="Remove embedded metadata from converted media. Image color profiles are preserved."
+                      Visibility="{Binding Settings, Converter={StaticResource ConversionSettingsRelevantToVisibility}, ConverterParameter=StripMetadata|Collapsed;Visible}"
+                      IsChecked="{Binding Settings, ConverterParameter=StripMetadata|System.Boolean, Converter={StaticResource ConversionSettingsToValueType}, Mode=TwoWay}" />
+        </StackPanel>
     </DataTemplate>
 
     <Style x:Key="ConversionSettingsSelectorStyle" TargetType="{x:Type ContentControl}">
