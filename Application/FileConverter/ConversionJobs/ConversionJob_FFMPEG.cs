@@ -411,6 +411,27 @@ namespace FileConverter.ConversionJobs
                                                       this.ConversionPreset.OutputType);
             }
 
+            bool stripMetadata = this.ConversionPreset.IsRelevantSetting(ConversionPreset.ConversionSettingKeys.StripMetadata) &&
+                                 this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.StripMetadata);
+            if (stripMetadata)
+            {
+                const string metadataArgs = "-map_metadata -1 -map_metadata:s -1 -map_chapters -1 -metadata encoder= -metadata:s encoder=";
+                string outputArgument = $" \"{this.OutputFilePath}\"";
+
+                for (int index = 0; index < this.ffmpegArgumentStringByPass.Count; index++)
+                {
+                    FFMpegPass pass = this.ffmpegArgumentStringByPass[index];
+                    if (!pass.Arguments.EndsWith(outputArgument, StringComparison.Ordinal))
+                    {
+                        continue;
+                    }
+
+                    pass.Arguments = pass.Arguments.Substring(0, pass.Arguments.Length - outputArgument.Length) +
+                                     $" {metadataArgs}{outputArgument}";
+                    this.ffmpegArgumentStringByPass[index] = pass;
+                }
+            }
+
             if (this.ffmpegArgumentStringByPass.Count == 0)
             {
                 throw new Exception("No ffmpeg arguments generated.");
