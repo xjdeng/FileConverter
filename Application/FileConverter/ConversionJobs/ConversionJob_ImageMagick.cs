@@ -244,6 +244,20 @@ namespace FileConverter.ConversionJobs
                     return;
             }
 
+            if (this.ConversionPreset.IsRelevantSetting(ConversionPreset.ConversionSettingKeys.StripMetadata) &&
+                this.ConversionPreset.GetSettingsValue<bool>(ConversionPreset.ConversionSettingKeys.StripMetadata))
+            {
+                Debug.Log("Strip image metadata while preserving the embedded color profile.");
+
+                IColorProfile colorProfile = image.GetColorProfile();
+                image.Strip();
+
+                if (colorProfile != null)
+                {
+                    image.SetProfile(colorProfile);
+                }
+            }
+
             image.Write(this.OutputFilePath);
             image.Progress -= this.Image_Progress;
         }
